@@ -6,23 +6,27 @@ import { Code2, Rocket, Zap, Shield } from "lucide-react";
 const skills = [
   {
     icon: Code2,
-    title: "Clean Code",
-    description: "Maintainable, scalable architecture built for long-term success",
+    title: "Clean, Maintainable Code",
+    description:
+      "Well-structured codebases that are easy to extend, debug, and hand over — even after the project is complete.",
   },
   {
     icon: Rocket,
-    title: "Fast Delivery",
-    description: "Efficient workflows that respect deadlines without compromising quality",
+    title: "Reliable Delivery",
+    description:
+      "Clear timelines, realistic estimates, and consistent progress updates so there are no surprises.",
   },
   {
     icon: Zap,
-    title: "Performance",
-    description: "Optimized applications that load fast and run smoothly",
+    title: "Performance-Focused",
+    description:
+      "Applications optimized for speed, responsiveness, and smooth user experience across devices.",
   },
   {
     icon: Shield,
-    title: "Secure & Reliable",
-    description: "Production-ready solutions with security best practices",
+    title: "Production-Ready & Secure",
+    description:
+      "Built with best practices for security, scalability, and long-term stability from day one.",
   },
 ];
 
@@ -31,7 +35,7 @@ export default function About() {
     <section id="about" className="relative py-32 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-      
+
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -48,16 +52,16 @@ export default function About() {
           >
             About Me
           </motion.span>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-            Building Digital Solutions That Matter
+            A Developer You Can Rely On
           </h2>
-          
+
           <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
-            I partner with startups, founders, and businesses to transform ideas into 
-            production-ready digital products. With a focus on writing clean, maintainable 
-            code and clear communication, I deliver solutions that scale and create 
-            measurable business impact.
+            I work with startups, founders, and growing teams to design and build
+            production-ready web and mobile applications. My focus goes beyond
+            writing code — I care about clarity, maintainability, and delivering
+            solutions that solve real business problems and scale with your needs.
           </p>
         </motion.div>
 
@@ -73,9 +77,8 @@ export default function About() {
               whileHover={{ y: -8, scale: 1.02 }}
               className="group relative p-6 rounded-2xl bg-gradient-to-br from-black/[0.02] to-black/[0.05] dark:from-white/[0.02] dark:to-white/[0.05] border border-black/5 dark:border-white/5 hover:border-primary/30 transition-all duration-300"
             >
-              {/* Hover glow effect */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-purple-500/0 group-hover:from-primary/5 group-hover:to-purple-500/5 transition-all duration-300" />
-              
+
               <div className="relative z-10">
                 <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
@@ -84,11 +87,11 @@ export default function About() {
                 >
                   <skill.icon className="text-primary" size={24} />
                 </motion.div>
-                
+
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
                   {skill.title}
                 </h3>
-                
+
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                   {skill.description}
                 </p>
@@ -106,11 +109,20 @@ export default function About() {
           className="mt-16 text-center"
         >
           <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">
-            Technologies I work with
+            Tools and technologies I regularly use
           </p>
-          
+
           <div className="flex flex-wrap justify-center gap-3">
-            {["React", "Next.js", "TypeScript", "Node.js", "Firebase", "Tailwind CSS", "Android", "PostgreSQL"].map((tech, index) => (
+            {[
+              "React",
+              "Next.js",
+              "TypeScript",
+              "Node.js",
+              "Firebase",
+              "Tailwind CSS",
+              "Android",
+              "PostgreSQL",
+            ].map((tech, index) => (
               <motion.span
                 key={tech}
                 initial={{ opacity: 0, scale: 0.8 }}
