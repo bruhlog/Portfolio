@@ -1,18 +1,28 @@
 "use client";
 
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
 /* ----------------------------------------
-   PROJECT DATA (ADD MORE HERE)
+   PROJECT DATA
 ---------------------------------------- */
 const projects = {
   "firebase-chat-app": {
     title: "Secure Firebase Chat Application",
+    seoTitle: "Secure Firebase Chat App | Zaid",
+    description:
+      "A secure one-on-one Firebase chat application with strict message ownership and scalable architecture.",
+    ogImage: "/og/firebase-chat.png",
     summary:
       "A production-ready one-on-one messaging system focused on security, ownership, and scalability.",
+    screenshots: [
+      "/projects/firebase/chat-1.png",
+      "/projects/firebase/chat-2.png",
+      "/projects/firebase/chat-3.png",
+    ],
     problem:
       "The client needed a secure real-time chat system where only paired devices could read and delete messages, while supporting multiple independent user pairs simultaneously.",
     solution:
@@ -33,8 +43,16 @@ const projects = {
 
   "video-calling-platform": {
     title: "Real-Time Video Calling Platform",
+    seoTitle: "Real-Time Video Calling Platform | Zaid",
+    description:
+      "A real-time video calling platform built with Agora and Firebase for smooth communication.",
+    ogImage: "/og/video-calling.png",
     summary:
       "A reliable video calling solution with real-time signaling and device-based call workflows.",
+    screenshots: [
+      "/projects/video/video-1.png",
+      "/projects/video/video-2.png",
+    ],
     problem:
       "The goal was to enable smooth, real-time video calls with proper permission handling, call states, and device-to-device signaling.",
     solution:
@@ -54,8 +72,16 @@ const projects = {
 
   "encrypted-api-platform": {
     title: "Encrypted API & Data Platform",
+    seoTitle: "Encrypted Firebase API Platform | Zaid",
+    description:
+      "An encrypted backend platform securing Firebase data with AES-256 and API-key access.",
+    ogImage: "/og/encrypted-api.png",
     summary:
       "A secure backend system that encrypts Firebase data and exposes it via controlled API access.",
+    screenshots: [
+      "/projects/api/api-1.png",
+      "/projects/api/api-2.png",
+    ],
     problem:
       "Sensitive Firebase data needed to be accessed externally without exposing raw database access or encryption keys.",
     solution:
@@ -77,6 +103,46 @@ const projects = {
 type ProjectSlug = keyof typeof projects;
 
 /* ----------------------------------------
+   SEO METADATA
+---------------------------------------- */
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const project = projects[params.slug as ProjectSlug];
+
+  if (!project) {
+    return {
+      title: "Project Not Found | Zaid",
+    };
+  }
+
+  return {
+    title: project.seoTitle,
+    description: project.description,
+    openGraph: {
+      title: project.seoTitle,
+      description: project.description,
+      images: [
+        {
+          url: project.ogImage,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.seoTitle,
+      description: project.description,
+      images: [project.ogImage],
+    },
+  };
+}
+
+/* ----------------------------------------
    PAGE COMPONENT
 ---------------------------------------- */
 export default function ProjectPage({
@@ -90,10 +156,30 @@ export default function ProjectPage({
 
   return (
     <section className="relative py-32 overflow-hidden">
-      {/* Top divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
       <div className="max-w-3xl mx-auto px-6">
+        {/* Breadcrumbs */}
+        <nav className="text-sm text-gray-500 mb-6">
+          <ol className="flex gap-2">
+            <li>
+              <Link href="/" className="hover:text-primary">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/#projects" className="hover:text-primary">
+                Projects
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-gray-700 dark:text-gray-300">
+              {project.title}
+            </li>
+          </ol>
+        </nav>
+
         {/* Back link */}
         <Link
           href="/#projects"
@@ -113,25 +199,43 @@ export default function ProjectPage({
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {project.title}
           </h1>
-
-          <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             {project.summary}
           </p>
         </motion.div>
 
+        {/* Screenshot Gallery */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl font-semibold mb-6">
+            Project Screenshots
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {project.screenshots.map((src) => (
+              <div
+                key={src}
+                className="rounded-2xl overflow-hidden border border-black/10 dark:border-white/10"
+              >
+                <img
+                  src={src}
+                  alt={project.title}
+                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Sections */}
         <div className="space-y-12">
-          {/* Problem */}
-          <Section title="The Problem">
-            {project.problem}
-          </Section>
+          <Section title="The Problem">{project.problem}</Section>
+          <Section title="The Solution">{project.solution}</Section>
 
-          {/* Solution */}
-          <Section title="The Solution">
-            {project.solution}
-          </Section>
-
-          {/* Tech */}
           <Section title="Technologies Used">
             <ul className="flex flex-wrap gap-3">
               {project.tech.map((item) => (
@@ -145,11 +249,10 @@ export default function ProjectPage({
             </ul>
           </Section>
 
-          {/* Outcome */}
           <Section title="Outcome & Impact">
             <ul className="space-y-3">
               {project.outcome.map((item) => (
-                <li key={item} className="flex items-start gap-2">
+                <li key={item} className="flex gap-2">
                   <CheckCircle size={18} className="text-primary mt-1" />
                   <span className="text-gray-600 dark:text-gray-400">
                     {item}
@@ -178,13 +281,31 @@ export default function ProjectPage({
             Let’s Build It Together
           </Link>
         </motion.div>
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              name: project.title,
+              description: project.description,
+              author: {
+                "@type": "Person",
+                name: "Zaid",
+              },
+              url: `https://zaid-portfolio789.vercel.app/projects/${params.slug}`,
+            }),
+          }}
+        />
       </div>
     </section>
   );
 }
 
 /* ----------------------------------------
-   REUSABLE SECTION COMPONENT
+   REUSABLE SECTION
 ---------------------------------------- */
 function Section({
   title,
