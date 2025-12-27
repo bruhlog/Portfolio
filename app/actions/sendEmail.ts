@@ -3,39 +3,45 @@
 import nodemailer from "nodemailer";
 import { headers } from "next/headers";
 import { rateLimit } from "@/app/lib/rateLimit";
-const ip = headers().get("x-forwarded-for") || "unknown";
-
-if (!rateLimit(ip)) {
-  return { success: false, error: "Too many requests. Please wait." };
-}
-
 
 export async function sendEmail(formData: FormData) {
   try {
-    const token = formData.get("recaptchaToken");
+    // 🔐 Rate limiting (must be inside function + try)
+    const ip =
+      headers().get("x-forwarded-for")?.split(",")[0] || "unknown";
 
+    if (!rateLimit(ip)) {
+      return {
+        success: false,
+        error: "Too many requests. Please wait a minute.",
+      };
+    }
+
+    // 🛡 reCAPTCHA token
+    const token = formData.get("recaptchaToken");
     if (!token) {
       return { success: false };
     }
 
-    // Verify reCAPTCHA
+    // ✅ Verify reCAPTCHA with Google
     const captchaRes = await fetch(
       "https://www.google.com/recaptcha/api/siteverify",
       {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
         body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
       }
     );
 
     const captchaData = await captchaRes.json();
 
-    // Score check (v3)
     if (!captchaData.success || captchaData.score < 0.5) {
       return { success: false };
     }
 
-    // Send email
+    // 📧 Send email
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -52,7 +58,8 @@ export async function sendEmail(formData: FormData) {
     });
 
     return { success: true };
-  } catch {
+  } catch (error) {
+    console.error("sendEmail error:", error);
     return { success: false };
   }
 }
