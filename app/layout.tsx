@@ -49,11 +49,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-black text-white transition-colors duration-300">
-        <Script
-          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-          strategy="afterInteractive"
-        />
+      
 
         <ThemeProvider
           attribute="class"
@@ -61,6 +57,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <body className="bg-black text-white transition-colors duration-300">
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+          strategy="afterInteractive"
+        />
           <Navbar />
           <main className="pt-20">{children}</main>
         </ThemeProvider>
