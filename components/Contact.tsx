@@ -3,6 +3,8 @@
 import { useTransition } from "react";
 import { sendEmail } from "@/app/actions/sendEmail";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
+import { Send, Mail, MessageSquare, User } from "lucide-react";
 
 declare global {
   interface Window {
@@ -31,7 +33,7 @@ export default function Contact() {
         const res = await sendEmail(formData);
 
         if (res.success) {
-          toast.success("Message sent! I’ll get back to you soon.");
+          toast.success("Message sent! I'll get back to you soon.");
         } else {
           toast.error("Something went wrong. Please try again.");
         }
@@ -42,66 +44,205 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="max-w-xl mx-auto px-6 py-32">
-      <h2 className="text-4xl font-bold mb-4 text-center">
-        Let’s Build Something Great
-      </h2>
+    <section id="contact" className="relative py-32 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl pointer-events-none"
+      />
 
-      <p className="text-center text-gray-500 mb-8">
-        Tell me about your project — I’ll respond within 24 hours.
-      </p>
-
-      <form action={handleSubmit} className="space-y-4">
-        <input
-          name="name"
-          required
-          placeholder="Your Name"
-          className="w-full p-3 rounded border bg-transparent"
-        />
-
-        <input
-          name="email"
-          required
-          type="email"
-          placeholder="Your Email"
-          className="w-full p-3 rounded border bg-transparent"
-        />
-
-        <textarea
-          name="message"
-          required
-          placeholder="Project details, timeline, budget..."
-          className="w-full p-3 rounded border bg-transparent h-32"
-        />
-
-        <button
-          disabled={isPending}
-          className="w-full bg-primary py-3 rounded font-semibold text-white disabled:opacity-50"
+      <div className="max-w-2xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
         >
-          {isPending ? "Sending..." : "Send Message"}
-        </button>
-      </form>
+          <motion.span
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4"
+          >
+            Get In Touch
+          </motion.span>
+          
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+            Let's Build Something Great
+          </h2>
 
-      {/* reCAPTCHA legal text */}
-      <p className="text-xs text-gray-400 text-center mt-6">
-        This site is protected by reCAPTCHA and the Google{" "}
-        <a
-          href="https://policies.google.com/privacy"
-          target="_blank"
-          className="underline"
+          <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+            Have a project in mind? I respond to all inquiries within 24 hours. 
+            Let's discuss how I can help bring your vision to life.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="relative"
         >
-          Privacy Policy
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://policies.google.com/terms"
-          target="_blank"
-          className="underline"
+          {/* Glassmorphic card */}
+          <div className="relative p-8 md:p-10 rounded-3xl bg-gradient-to-br from-white/80 to-white/40 dark:from-black/40 dark:to-black/20 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl">
+            <form action={handleSubmit} className="space-y-6">
+              {/* Name Input */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="relative"
+              >
+                <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                  <User size={16} />
+                  Your Name
+                </label>
+                <input
+                  name="name"
+                  required
+                  placeholder="John Doe"
+                  className="w-full px-4 py-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                />
+              </motion.div>
+
+              {/* Email Input */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="relative"
+              >
+                <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                  <Mail size={16} />
+                  Email Address
+                </label>
+                <input
+                  name="email"
+                  required
+                  type="email"
+                  placeholder="john@example.com"
+                  className="w-full px-4 py-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                />
+              </motion.div>
+
+              {/* Message Input */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="relative"
+              >
+                <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                  <MessageSquare size={16} />
+                  Project Details
+                </label>
+                <textarea
+                  name="message"
+                  required
+                  placeholder="Tell me about your project, timeline, budget, and any specific requirements..."
+                  className="w-full px-4 py-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none h-40"
+                />
+              </motion.div>
+
+              {/* Submit Button */}
+              <motion.button
+                type="submit"
+                disabled={isPending}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+                className="group relative w-full py-4 bg-gradient-to-r from-primary to-purple-500 rounded-xl font-semibold text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {isPending ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                      />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </span>
+                
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-purple-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              </motion.button>
+            </form>
+
+            {/* reCAPTCHA legal text */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+              className="text-xs text-gray-500 text-center mt-6 leading-relaxed"
+            >
+              This site is protected by reCAPTCHA. Google's{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                className="underline hover:text-primary transition-colors"
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://policies.google.com/terms"
+                target="_blank"
+                className="underline hover:text-primary transition-colors"
+              >
+                Terms of Service
+              </a>{" "}
+              apply.
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Quick contact info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+          className="mt-12 text-center"
         >
-          Terms of Service
-        </a>{" "}
-        apply.
-      </p>
+          <p className="text-sm text-gray-500 mb-4">
+            Prefer email? Reach out directly at
+          </p>
+          <a
+            href="mailto:hello@zaid.dev"
+            className="text-primary font-semibold hover:underline"
+          >
+            hello@zaid.dev
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 }
