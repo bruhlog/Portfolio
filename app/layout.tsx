@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
+import { Toaster } from "sonner";
 
 
 export const metadata: Metadata = {
@@ -56,15 +57,22 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+              disableTransitionOnChange
         >
-         
-          <Navbar />
-          <main className="pt-20">{children}</main>
-        </ThemeProvider>
+        <Navbar />
+        <main className="pt-20">{children}</main>
+
+  {/* Toast notifications */}
+  <Toaster
+    position="bottom-right"
+    richColors
+    closeButton
+  />
+</ThemeProvider>
+
       </body>
     </html>
   );

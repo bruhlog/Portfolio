@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { sendEmail } from "@/app/actions/sendEmail";
+import { toast } from "sonner";
 
 declare global {
   interface Window {
@@ -10,28 +11,34 @@ declare global {
 }
 
 export default function Contact() {
-  const [status, setStatus] = useState<null | "success" | "error">(null);
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (formData: FormData) => {
-    setStatus(null);
-
     if (!window.grecaptcha) {
-      setStatus("error");
+      toast.error("reCAPTCHA not ready. Please refresh.");
       return;
     }
 
-    const token = await window.grecaptcha.execute(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-      { action: "submit" }
-    );
+    try {
+      const token = await window.grecaptcha.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
+        { action: "submit" }
+      );
 
-    formData.append("recaptchaToken", token);
+      formData.append("recaptchaToken", token);
 
-    startTransition(async () => {
-      const res = await sendEmail(formData);
-      setStatus(res.success ? "success" : "error");
-    });
+      startTransition(async () => {
+        const res = await sendEmail(formData);
+
+        if (res.success) {
+          toast.success("Message sent! I’ll get back to you soon.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      });
+    } catch {
+      toast.error("Unexpected error. Please try again.");
+    }
   };
 
   return (
@@ -73,29 +80,15 @@ export default function Contact() {
         >
           {isPending ? "Sending..." : "Send Message"}
         </button>
-
-        {/* Status messages */}
-        {status === "success" && (
-          <p className="text-green-500 text-center mt-4">
-            ✅ Message sent successfully. I’ll be in touch shortly.
-          </p>
-        )}
-
-        {status === "error" && (
-          <p className="text-red-500 text-center mt-4">
-            ❌ Something went wrong. Please try again.
-          </p>
-        )}
       </form>
 
-      {/* ✅ reCAPTCHA legal notice (UX-friendly & compliant) */}
-      <p className="text-xs text-gray-400 text-center mt-6 leading-relaxed">
+      {/* reCAPTCHA legal text */}
+      <p className="text-xs text-gray-400 text-center mt-6">
         This site is protected by reCAPTCHA and the Google{" "}
         <a
           href="https://policies.google.com/privacy"
           target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-gray-300"
+          className="underline"
         >
           Privacy Policy
         </a>{" "}
@@ -103,8 +96,7 @@ export default function Contact() {
         <a
           href="https://policies.google.com/terms"
           target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-gray-300"
+          className="underline"
         >
           Terms of Service
         </a>{" "}
