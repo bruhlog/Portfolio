@@ -3,12 +3,25 @@
 import { useState, useTransition } from "react";
 import { sendEmail } from "@/app/actions/sendEmail";
 
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
+
 export default function Contact() {
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (formData: FormData) => {
+  const handleSubmit = async (formData: FormData) => {
     setStatus(null);
+
+    const token = await window.grecaptcha.execute(
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+      { action: "submit" }
+    );
+
+    formData.append("recaptchaToken", token);
 
     startTransition(async () => {
       const res = await sendEmail(formData);
@@ -23,13 +36,13 @@ export default function Contact() {
       </h2>
 
       <p className="text-center text-gray-500 mb-8">
-        Tell me about your project and I’ll reply within 24 hours.
+        I respond within 24 hours. No spam — just real conversations.
       </p>
 
       <form action={handleSubmit} className="space-y-4">
         <input name="name" required placeholder="Your Name" className="w-full p-3 rounded border" />
         <input name="email" required type="email" placeholder="Your Email" className="w-full p-3 rounded border" />
-        <textarea name="message" required placeholder="Project details, timeline, budget..." className="w-full p-3 rounded border h-32" />
+        <textarea name="message" required placeholder="Project details..." className="w-full p-3 rounded border h-32" />
 
         <button
           disabled={isPending}
@@ -40,13 +53,13 @@ export default function Contact() {
 
         {status === "success" && (
           <p className="text-green-500 text-center mt-4">
-            ✅ Message sent! I’ll get back to you shortly.
+            ✅ Message sent successfully!
           </p>
         )}
 
         {status === "error" && (
           <p className="text-red-500 text-center mt-4">
-            ❌ Something went wrong. Please try again.
+            ❌ Verification failed. Please try again.
           </p>
         )}
       </form>

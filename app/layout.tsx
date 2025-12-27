@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "next-themes";
+import Script from "next/script";
+
 
 export const metadata: Metadata = {
   title: "Zaid | Freelance Full-Stack Developer",
@@ -48,6 +50,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-black text-white transition-colors duration-300">
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+          strategy="afterInteractive"
+        />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

@@ -4,14 +4,30 @@ import nodemailer from "nodemailer";
 
 export async function sendEmail(formData: FormData) {
   try {
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+    const token = formData.get("recaptchaToken");
 
-    if (!name || !email || !message) {
-      return { success: false, error: "Missing required fields." };
+    if (!token) {
+      return { success: false };
     }
 
+    // Verify reCAPTCHA
+    const captchaRes = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+      }
+    );
+
+    const captchaData = await captchaRes.json();
+
+    // Score check (v3)
+    if (!captchaData.success || captchaData.score < 0.5) {
+      return { success: false };
+    }
+
+    // Send email
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -23,13 +39,12 @@ export async function sendEmail(formData: FormData) {
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
-      replyTo: email as string,
-      subject: `New Project Inquiry from ${name}`,
-      text: message as string,
+      subject: "New Portfolio Inquiry",
+      text: formData.get("message") as string,
     });
 
     return { success: true };
-  } catch (error) {
-    return { success: false, error: "Something went wrong. Try again." };
+  } catch {
+    return { success: false };
   }
 }
