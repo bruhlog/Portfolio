@@ -1,20 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const projects = [
   {
     title: "Secure Firebase Chat App",
+    slug: "firebase-chat-app",
     description:
       "A real-time one-on-one messaging system with secure device pairing, message ownership, and scalable architecture."
   },
   {
     title: "Real-Time Video Calling Platform",
+    slug: "video-calling-platform",
     description:
       "High-quality video calling app using Agora & Firebase with call signaling, permissions, and device-based workflows."
   },
   {
     title: "Encrypted API & Data Platform",
+    slug: "encrypted-api-platform",
     description:
       "Backend system that encrypts Firebase data using AES, with secure API-key based access and Android client integration."
   }
@@ -39,14 +43,23 @@ export default function Projects() {
             viewport={{ once: true }}
             whileHover={{ y: -8 }}
             transition={{ duration: 0.6 }}
-            className="bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl p-6"
+            className="bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl p-6 flex flex-col"
           >
             <h3 className="text-xl font-semibold mb-3">
               {project.title}
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+
+            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-grow">
               {project.description}
             </p>
+
+            {/* 👇 STEP 2: LINK TO CASE STUDY */}
+            <Link
+              href={`/projects/${project.slug}`}
+              className="text-primary mt-4 inline-block font-medium"
+            >
+              View Case Study →
+            </Link>
           </motion.div>
         ))}
       </div>
