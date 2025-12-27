@@ -33,7 +33,7 @@ export default function Contact() {
         const res = await sendEmail(formData);
 
         if (res.success) {
-          toast.success("Message sent! I'll get back to you soon.");
+          toast.success("Message sent! I’ll get back to you shortly.");
         } else {
           toast.error("Something went wrong. Please try again.");
         }
@@ -47,17 +47,10 @@ export default function Contact() {
     <section id="contact" className="relative py-32 overflow-hidden">
       {/* Background effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-      
+
       <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl pointer-events-none"
       />
 
@@ -77,14 +70,15 @@ export default function Contact() {
           >
             Get In Touch
           </motion.span>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-            Let's Build Something Great
+            Let’s Talk About Your Project
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-            Have a project in mind? I respond to all inquiries within 24 hours. 
-            Let's discuss how I can help bring your vision to life.
+            Have an idea or an existing product that needs improvement?
+            Share a few details below — I personally review every message and
+            typically respond within 24 hours.
           </p>
         </motion.div>
 
@@ -98,13 +92,12 @@ export default function Contact() {
           {/* Glassmorphic card */}
           <div className="relative p-8 md:p-10 rounded-3xl bg-gradient-to-br from-white/80 to-white/40 dark:from-black/40 dark:to-black/20 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl">
             <form action={handleSubmit} className="space-y-6">
-              {/* Name Input */}
+              {/* Name */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="relative"
               >
                 <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   <User size={16} />
@@ -113,18 +106,17 @@ export default function Contact() {
                 <input
                   name="name"
                   required
-                  placeholder="John Doe"
+                  placeholder="Your full name"
                   className="w-full px-4 py-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
                 />
               </motion.div>
 
-              {/* Email Input */}
+              {/* Email */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="relative"
               >
                 <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   <Mail size={16} />
@@ -134,18 +126,17 @@ export default function Contact() {
                   name="email"
                   required
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder="you@example.com"
                   className="w-full px-4 py-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
                 />
               </motion.div>
 
-              {/* Message Input */}
+              {/* Message */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
-                className="relative"
               >
                 <label className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   <MessageSquare size={16} />
@@ -154,12 +145,12 @@ export default function Contact() {
                 <textarea
                   name="message"
                   required
-                  placeholder="Tell me about your project, timeline, budget, and any specific requirements..."
+                  placeholder="Briefly describe your project, goals, timeline, and any specific requirements. The more context you share, the better I can help."
                   className="w-full px-4 py-4 rounded-xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none h-40"
                 />
               </motion.div>
 
-              {/* Submit Button */}
+              {/* Submit */}
               <motion.button
                 type="submit"
                 disabled={isPending}
@@ -179,7 +170,7 @@ export default function Contact() {
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                         className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                       />
-                      Sending...
+                      Sending message…
                     </>
                   ) : (
                     <>
@@ -188,10 +179,8 @@ export default function Contact() {
                     </>
                   )}
                 </span>
-                
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity"
-                />
+
+                <motion.div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.button>
             </form>
 
@@ -203,7 +192,7 @@ export default function Contact() {
               transition={{ delay: 0.7 }}
               className="text-xs text-gray-500 text-center mt-6 leading-relaxed"
             >
-              This site is protected by reCAPTCHA. Google's{" "}
+              This site is protected by reCAPTCHA and the Google{" "}
               <a
                 href="https://policies.google.com/privacy"
                 target="_blank"
@@ -224,7 +213,7 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Quick contact info */}
+        {/* Direct contact */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -233,7 +222,7 @@ export default function Contact() {
           className="mt-12 text-center"
         >
           <p className="text-sm text-gray-500 mb-4">
-            Prefer email? Reach out directly at
+            Prefer email? You can reach me directly at
           </p>
           <a
             href="mailto:hello@zaid.dev"
