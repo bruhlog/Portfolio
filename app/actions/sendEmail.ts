@@ -1,6 +1,14 @@
 "use server";
 
 import nodemailer from "nodemailer";
+import { headers } from "next/headers";
+import { rateLimit } from "@/app/lib/rateLimit";
+const ip = headers().get("x-forwarded-for") || "unknown";
+
+if (!rateLimit(ip)) {
+  return { success: false, error: "Too many requests. Please wait." };
+}
+
 
 export async function sendEmail(formData: FormData) {
   try {
