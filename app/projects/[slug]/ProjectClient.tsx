@@ -7,10 +7,10 @@ import { ArrowLeft, CheckCircle } from "lucide-react";
 type Project = {
   title: string;
   summary: string;
-  screenshots: string[];
+  screenshots: readonly string[];
   problem: string;
   solution: string;
-  outcome: string[];
+  outcome: readonly string[];
 };
 
 export default function ProjectClient({
