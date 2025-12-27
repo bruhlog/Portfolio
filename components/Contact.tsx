@@ -16,8 +16,13 @@ export default function Contact() {
   const handleSubmit = async (formData: FormData) => {
     setStatus(null);
 
+    if (!window.grecaptcha) {
+      setStatus("error");
+      return;
+    }
+
     const token = await window.grecaptcha.execute(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
       { action: "submit" }
     );
 
@@ -36,13 +41,31 @@ export default function Contact() {
       </h2>
 
       <p className="text-center text-gray-500 mb-8">
-        I respond within 24 hours. No spam — just real conversations.
+        Tell me about your project — I’ll respond within 24 hours.
       </p>
 
       <form action={handleSubmit} className="space-y-4">
-        <input name="name" required placeholder="Your Name" className="w-full p-3 rounded border" />
-        <input name="email" required type="email" placeholder="Your Email" className="w-full p-3 rounded border" />
-        <textarea name="message" required placeholder="Project details..." className="w-full p-3 rounded border h-32" />
+        <input
+          name="name"
+          required
+          placeholder="Your Name"
+          className="w-full p-3 rounded border bg-transparent"
+        />
+
+        <input
+          name="email"
+          required
+          type="email"
+          placeholder="Your Email"
+          className="w-full p-3 rounded border bg-transparent"
+        />
+
+        <textarea
+          name="message"
+          required
+          placeholder="Project details, timeline, budget..."
+          className="w-full p-3 rounded border bg-transparent h-32"
+        />
 
         <button
           disabled={isPending}
@@ -51,18 +74,42 @@ export default function Contact() {
           {isPending ? "Sending..." : "Send Message"}
         </button>
 
+        {/* Status messages */}
         {status === "success" && (
           <p className="text-green-500 text-center mt-4">
-            ✅ Message sent successfully!
+            ✅ Message sent successfully. I’ll be in touch shortly.
           </p>
         )}
 
         {status === "error" && (
           <p className="text-red-500 text-center mt-4">
-            ❌ Verification failed. Please try again.
+            ❌ Something went wrong. Please try again.
           </p>
         )}
       </form>
+
+      {/* ✅ reCAPTCHA legal notice (UX-friendly & compliant) */}
+      <p className="text-xs text-gray-400 text-center mt-6 leading-relaxed">
+        This site is protected by reCAPTCHA and the Google{" "}
+        <a
+          href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-gray-300"
+        >
+          Privacy Policy
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://policies.google.com/terms"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-gray-300"
+        >
+          Terms of Service
+        </a>{" "}
+        apply.
+      </p>
     </section>
   );
 }

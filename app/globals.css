@@ -19,3 +19,6 @@ body {
   background-color: white;
   color: black;
 }
+.grecaptcha-badge {
+  visibility: hidden;
+}
