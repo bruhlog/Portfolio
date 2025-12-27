@@ -8,30 +8,16 @@ export default function Hero() {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 dark:from-primary/10 dark:to-purple-500/10" />
-      
+
       {/* Animated orbs */}
       <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
       />
       <motion.div
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
       />
 
@@ -52,30 +38,35 @@ export default function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </span>
-          <span className="text-sm font-medium">Available for freelance</span>
+          <span className="text-sm font-medium">
+            Available for freelance projects
+          </span>
         </motion.div>
 
-        {/* Main heading with gradient */}
+        {/* Main heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
         >
-          Crafting Digital
+          I build fast, scalable
           <br />
           <span className="bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-            Experiences
+            web & mobile apps
           </span>
         </motion.h1>
 
+        {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-gray-600 dark:text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          Full-stack developer specializing in building performant, scalable applications that drive real business results.
+          I help startups and businesses turn ideas into reliable, 
+          production-ready applications — focused on performance, 
+          clean UX, and real business outcomes.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -91,12 +82,10 @@ export default function Hero() {
             whileTap={{ scale: 0.98 }}
             className="group relative px-8 py-4 bg-gradient-to-r from-primary to-purple-500 rounded-2xl font-semibold text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all overflow-hidden"
           >
-            <span className="relative z-10">Explore My Work</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity"
-            />
+            <span className="relative z-10">View Selected Work</span>
+            <motion.div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
           </motion.a>
-          
+
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.05, y: -2 }}
