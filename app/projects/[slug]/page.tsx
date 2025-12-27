@@ -1,3 +1,5 @@
+"use client";
+
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle } from "lucide-react";
