@@ -6,6 +6,41 @@ import ProjectClient from "./ProjectClient";
    PROJECT DATA
 ---------------------------------------- */
 const projects = {
+  "call-center-admin-dashboard": {
+    title: "Call Center Admin Dashboard",
+    seoTitle: "Call Center Admin Dashboard | Zaid",
+    description:
+      "A powerful administrative dashboard for call center management with real-time analytics, agent monitoring, and comprehensive reporting tools.",
+    ogImage: "/og/call-center-admin.png",
+    summary:
+      "An enterprise-grade administrative dashboard designed for call center supervisors and managers to monitor operations, track agent performance, analyze call metrics, and generate comprehensive reports with real-time data visualization.",
+    screenshots: [
+      "/projects/admin-dashboard/screenshot-1.png",
+    ],
+    problem:
+      "Call center managers needed a centralized dashboard to oversee operations, monitor agent performance in real-time, analyze call patterns, and generate actionable insights to improve service quality and operational efficiency.",
+    solution:
+      "Built a feature-rich admin dashboard with real-time data visualization, agent performance metrics, call analytics, customizable reports, and role-based access control. Integrated advanced charting libraries for intuitive data representation and implemented WebSocket connections for live updates.",
+    tech: [
+      "React.js / Next.js",
+      "Node.js / Express",
+      "MongoDB / PostgreSQL",
+      "Chart.js / D3.js",
+      "WebSocket / Socket.io",
+      "RESTful APIs",
+      "JWT Authentication",
+    ],
+    outcome: [
+      "Successfully deployed on Render with high availability",
+      "Real-time monitoring of 50+ concurrent agents",
+      "Reduced response time to operational issues by 40%",
+      "Automated reporting saved 10+ hours per week",
+      "Improved decision-making with data-driven insights",
+      "Enhanced operational efficiency across the call center",
+    ],
+    liveLink: "https://lallaff.onrender.com"
+  },
+
   "call-center-agent-portal": {
     title: "Call Center Agent Portal",
     seoTitle: "Call Center Agent Portal | Zaid",

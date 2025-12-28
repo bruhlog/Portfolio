@@ -2,9 +2,18 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Lock, Video, Database, Receipt, Globe, Headphones } from "lucide-react";
+import { ArrowUpRight, Lock, Video, Database, Receipt, Globe, Headphones, LayoutDashboard } from "lucide-react";
 
 const projects = [
+  {
+    title: "Call Center Admin Dashboard",
+    slug: "call-center-admin-dashboard",
+    description:
+      "A powerful administrative dashboard for call center management, providing real-time analytics, agent performance monitoring, call metrics tracking, and comprehensive reporting tools for supervisors and managers.",
+    icon: LayoutDashboard,
+    gradient: "from-violet-500 to-fuchsia-600",
+    tags: ["Admin Dashboard", "Analytics", "Management Portal"],
+  },
   {
     title: "Call Center Agent Portal",
     slug: "call-center-agent-portal",
@@ -210,5 +219,5 @@ export default function Projects() {
         </motion.div>
       </div>
     </section>
-   );
+  );
 }
