@@ -2,9 +2,18 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Lock, Video, Database } from "lucide-react";
+import { ArrowUpRight, Lock, Video, Database, Receipt } from "lucide-react";
 
 const projects = [
+  {
+    title: "Bill Recorder App",
+    slug: "bill-recorder-app",
+    description:
+      "A comprehensive mobile application for iOS and Android that helps users track, manage, and organize their bills and expenses with an intuitive interface and smart features.",
+    icon: Receipt,
+    gradient: "from-orange-500 to-red-500",
+    tags: ["Mobile App", "iOS", "Android"],
+  },
   {
     title: "Secure Firebase Chat Application",
     slug: "firebase-chat-app",
@@ -178,7 +187,7 @@ export default function Projects() {
             whileTap={{ scale: 0.98 }}
             className="inline-block px-8 py-4 bg-gradient-to-r from-primary to-purple-500 rounded-2xl font-semibold text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all"
           >
-            Let’s Talk About Your Project
+            Let's Talk About Your Project
           </motion.a>
         </motion.div>
       </div>

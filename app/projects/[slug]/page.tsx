@@ -6,6 +6,40 @@ import ProjectClient from "./ProjectClient";
    PROJECT DATA
 ---------------------------------------- */
 const projects = {
+  "bill-recorder-app": {
+    title: "Bill Recorder App",
+    seoTitle: "Bill Recorder App | Zaid",
+    description:
+      "A comprehensive mobile application for iOS and Android that helps users track, manage, and organize their bills and expenses.",
+    ogImage: "/og/bill-recorder.png",
+    summary:
+      "A cross-platform mobile application designed to simplify bill tracking and expense management for users on both iOS and Android platforms.",
+    screenshots: [
+      "/projects/bill-recorder/screenshot-1.png",
+      "/projects/bill-recorder/screenshot-2.png",
+      "/projects/bill-recorder/screenshot-3.png",
+    ],
+    problem:
+      "Users needed a simple yet powerful way to track their bills and expenses across multiple platforms without complexity.",
+    solution:
+      "Developed a native mobile application for both iOS and Android with an intuitive interface, smart categorization, and seamless synchronization.",
+    tech: [
+      "React Native / Flutter",
+      "Cross-Platform Development",
+      "Mobile UI/UX",
+      "Cloud Sync",
+    ],
+    outcome: [
+      "Successfully published on both App Store and Play Store",
+      "Streamlined bill tracking for users across platforms",
+      "Intuitive user experience with positive reviews",
+    ],
+    storeLinks: {
+      appStore: "https://apps.apple.com/in/app/bill-recorder/id6753971772",
+      playStore: "https://play.google.com/store/apps/details?id=com.conspicuous.app&pcampaignid=web_share"
+    }
+  },
+
   "firebase-chat-app": {
     title: "Secure Firebase Chat Application",
     seoTitle: "Secure Firebase Chat App | Zaid",
