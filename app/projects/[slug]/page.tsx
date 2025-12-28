@@ -6,6 +6,40 @@ import ProjectClient from "./ProjectClient";
    PROJECT DATA
 ---------------------------------------- */
 const projects = {
+  "conspicuous-solutions-website": {
+    title: "Conspicuous Solutions Website",
+    seoTitle: "Conspicuous Solutions Corporate Website | Zaid",
+    description:
+      "A modern, responsive corporate website showcasing IT & electronics innovation services including software development, IoT, and embedded systems.",
+    ogImage: "/og/conspicuous-solutions.png",
+    summary:
+      "A professional corporate website designed to showcase Conspicuous Solutions' expertise in next-generation software, embedded technology, AI, IoT, and cloud solutions for enterprise clients.",
+    screenshots: [
+      "/projects/conspicuous/screenshot-1.png",
+      "/projects/conspicuous/screenshot-2.png",
+      "/projects/conspicuous/screenshot-3.png",
+    ],
+    problem:
+      "Conspicuous Solutions needed a modern, professional web presence to showcase their diverse IT and electronics engineering services to potential clients and partners.",
+    solution:
+      "Developed a responsive, feature-rich website with engaging animations, service showcases, employee testimonials, and clear contact pathways. Implemented modern UI/UX principles with sections for services, products, leadership team, and media coverage.",
+    tech: [
+      "HTML5 & CSS3",
+      "JavaScript",
+      "Responsive Design",
+      "Modern UI/UX",
+      "SEO Optimization",
+    ],
+    outcome: [
+      "Successfully launched professional corporate website",
+      "Enhanced online presence for B2B and enterprise clients",
+      "Showcased comprehensive service portfolio effectively",
+      "Integrated contact forms and social media connections",
+      "Highlighted MSME registration and DUNS certification",
+    ],
+    liveLink: "https://conspicuous-solutions.in/"
+  },
+
   "bill-recorder-app": {
     title: "Bill Recorder App",
     seoTitle: "Bill Recorder App | Zaid",

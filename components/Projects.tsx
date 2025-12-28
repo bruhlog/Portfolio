@@ -2,9 +2,18 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Lock, Video, Database, Receipt } from "lucide-react";
+import { ArrowUpRight, Lock, Video, Database, Receipt, Globe } from "lucide-react";
 
 const projects = [
+  {
+    title: "Conspicuous Solutions Website",
+    slug: "conspicuous-solutions-website",
+    description:
+      "A modern, responsive corporate website for an IT & electronics innovation company, showcasing their services in software development, IoT, embedded systems, and custom engineering solutions.",
+    icon: Globe,
+    gradient: "from-indigo-500 to-purple-600",
+    tags: ["Web Development", "Corporate Website", "Responsive Design"],
+  },
   {
     title: "Bill Recorder App",
     slug: "bill-recorder-app",

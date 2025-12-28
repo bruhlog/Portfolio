@@ -15,6 +15,7 @@ type Project = {
     appStore?: string;
     playStore?: string;
   };
+  liveLink?: string;
 };
 
 export default function ProjectClient({
@@ -71,6 +72,28 @@ export default function ProjectClient({
         <p className="text-gray-600 dark:text-gray-400 mb-8">
           {project.summary}
         </p>
+
+        {/* Live Website Link */}
+        {project.liveLink && (
+          <div className="mb-12">
+            <motion.a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              Visit Live Website
+              <ExternalLink size={16} />
+            </motion.a>
+          </div>
+        )}
 
         {/* Store Links */}
         {project.storeLinks && (
