@@ -6,6 +6,41 @@ import ProjectClient from "./ProjectClient";
    PROJECT DATA
 ---------------------------------------- */
 const projects = {
+  "call-center-agent-portal": {
+    title: "Call Center Agent Portal",
+    seoTitle: "Call Center Agent Portal | Zaid",
+    description:
+      "A comprehensive web-based portal for call center operations, enabling efficient customer interaction management and agent workflow optimization.",
+    ogImage: "/og/call-center-portal.png",
+    summary:
+      "A professional call center agent portal designed to streamline customer service operations, manage call interactions, track agent performance, and handle customer data with a modern, intuitive interface.",
+    screenshots: [
+      "/projects/call-center/screenshot-1.png",
+      "/projects/call-center/screenshot-2.png",
+      "/projects/call-center/screenshot-3.png",
+    ],
+    problem:
+      "Call center operations needed a centralized platform where agents could efficiently manage customer interactions, access customer information, and track their performance in real-time.",
+    solution:
+      "Developed a full-stack web portal with a responsive frontend and robust backend, featuring agent authentication, customer data management, call logging, real-time dashboards, and performance analytics. The portal provides an intuitive interface for agents to handle multiple tasks seamlessly.",
+    tech: [
+      "React.js",
+      "Node.js / Express",
+      "MongoDB / PostgreSQL",
+      "RESTful APIs",
+      "Authentication & Authorization",
+      "Responsive Design",
+    ],
+    outcome: [
+      "Successfully deployed on Render with reliable uptime",
+      "Streamlined call center operations and agent workflows",
+      "Improved customer data accessibility and management",
+      "Real-time performance tracking and analytics",
+      "Enhanced agent productivity and customer service quality",
+    ],
+    liveLink: "https://callcenter-frontend-o9od.onrender.com"
+  },
+
   "conspicuous-solutions-website": {
     title: "Conspicuous Solutions Website",
     seoTitle: "Conspicuous Solutions Corporate Website | Zaid",
@@ -17,7 +52,6 @@ const projects = {
     screenshots: [
       "/projects/conspicuous/screenshot-1.png",
       "/projects/conspicuous/screenshot-2.png",
-      // "/projects/conspicuous/screenshot-3.png",
     ],
     problem:
       "Conspicuous Solutions needed a modern, professional web presence to showcase their diverse IT and electronics engineering services to potential clients and partners.",
