@@ -17,7 +17,7 @@ const projects = {
     screenshots: [
       "/projects/conspicuous/screenshot-1.png",
       "/projects/conspicuous/screenshot-2.png",
-      "/projects/conspicuous/screenshot-3.png",
+      // "/projects/conspicuous/screenshot-3.png",
     ],
     problem:
       "Conspicuous Solutions needed a modern, professional web presence to showcase their diverse IT and electronics engineering services to potential clients and partners.",
