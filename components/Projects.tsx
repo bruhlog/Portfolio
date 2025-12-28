@@ -2,9 +2,18 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Lock, Video, Database, Receipt, Globe } from "lucide-react";
+import { ArrowUpRight, Lock, Video, Database, Receipt, Globe, Headphones } from "lucide-react";
 
 const projects = [
+  {
+    title: "Call Center Agent Portal",
+    slug: "call-center-agent-portal",
+    description:
+      "A comprehensive web-based portal for call center operations, enabling agents to manage customer interactions, track calls, and handle customer data efficiently with a modern, user-friendly interface.",
+    icon: Headphones,
+    gradient: "from-cyan-500 to-blue-600",
+    tags: ["Web Portal", "Call Center", "Agent Management"],
+  },
   {
     title: "Conspicuous Solutions Website",
     slug: "conspicuous-solutions-website",
@@ -201,5 +210,5 @@ export default function Projects() {
         </motion.div>
       </div>
     </section>
-  );
+   );
 }
