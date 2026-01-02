@@ -53,7 +53,7 @@ export default function Navbar() {
               whileTap={{ scale: 0.95 }}
               className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent"
             >
-              Zaid.dev
+              Portfolio
             </motion.a>
 
             {/* Desktop Navigation */}
